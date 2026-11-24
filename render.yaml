@@ -1,0 +1,16 @@
+# Render Blueprint — New + > Blueprint, pick this repo. Deploys API + dashboard as ONE service.
+services:
+  - type: web
+    name: smart-traffic
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: CAMERA_NODES        # free tier has ~0.1 CPU: run 6 of the 12 cameras, remove for all
+        value: "J1,J2,J3,J5,J6,H1"
+      - key: CAMERA_FPS
+        value: "5"
+      - key: CORS_ORIGINS
+        value: "*"

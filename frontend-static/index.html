@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f17" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ef4444'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='white'/%3E%3C/svg%3E" />
+    <title>Smart Traffic · Emergency Routing</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo">✚</span>
+          <div>
+            <h1>Smart Traffic &amp; Emergency Routing</h1>
+            <p>Live congestion from camera feeds → fastest clear route for ambulances</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="btn ghost hidden" id="resetBtn" title="Clear missions, closures, jams and restore cameras">Reset demo</button>
+          <span class="pill connecting" id="pill"><i></i> <span id="pillText">Connecting…</span></span>
+        </div>
+      </header>
+
+      <section class="kpis" id="kpis"></section>
+      <div class="banner hidden" id="banner"></div>
+
+      <main class="layout">
+        <section class="panel map-panel">
+          <header class="panel-h">
+            <h2>Live network map</h2>
+            <div class="legend">
+              <span><i style="background:#22c55e"></i>free</span>
+              <span><i style="background:#eab308"></i>moderate</span>
+              <span><i style="background:#f97316"></i>heavy</span>
+              <span><i style="background:#ef4444"></i>gridlock</span>
+              <span><i class="dash"></i>shortest route</span>
+            </div>
+          </header>
+          <div id="map"><div class="map-empty">Waiting for the backend…</div></div>
+        </section>
+
+        <aside class="side">
+          <div id="nodePanel"></div>
+
+          <section class="panel">
+            <header class="panel-h"><h2>Dispatch ambulance</h2></header>
+            <label class="field"><span>Incident location</span>
+              <select id="origin"><option value="">Select a junction…</option></select></label>
+            <label class="field"><span>Destination</span>
+              <select id="dest"><option value="">Auto — fastest hospital</option></select></label>
+            <label class="field"><span>Simulation speed</span>
+              <select id="speed">
+                <option value="1">1× (real time)</option><option value="3">3×</option>
+                <option value="6" selected>6×</option><option value="12">12×</option><option value="30">30×</option>
+              </select></label>
+            <div class="preview hidden" id="preview"></div>
+            <button class="btn danger wide" id="dispatchBtn" disabled>🚑 Dispatch</button>
+          </section>
+
+          <section class="panel">
+            <header class="panel-h"><h2>Missions</h2><span class="count" id="missionCount"></span></header>
+            <div id="missions"></div>
+          </section>
+        </aside>
+      </main>
+
+      <section class="panel cams">
+        <header class="panel-h"><h2>Camera status</h2><span class="count">click a feed to inspect</span></header>
+        <div class="cam-grid" id="cams"><p class="muted">No data yet.</p></div>
+      </section>
+    </div>
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

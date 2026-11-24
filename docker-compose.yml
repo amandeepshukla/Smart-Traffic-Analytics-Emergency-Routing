@@ -1,0 +1,18 @@
+# One command: docker compose up --build   ->  http://localhost:8000  (dashboard + API)
+services:
+  app:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DETECTOR: auto
+      CAMERA_FPS: "8"
+      CORS_ORIGINS: "*"
+      ENABLE_SIMULATION_API: "true"
+    # Use your own footage: put videos in backend/videos, edit backend/cameras.json, then uncomment:
+    # volumes:
+    #   - ./backend/videos:/app/videos:ro
+    #   - ./backend/cameras.json:/app/cameras.json:ro
+    restart: unless-stopped

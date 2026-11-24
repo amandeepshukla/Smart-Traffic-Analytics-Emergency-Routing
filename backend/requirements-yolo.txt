@@ -1,0 +1,3 @@
+# Optional: accurate YOLO vehicle detection for real street footage.
+# Install with:  pip install -r requirements-yolo.txt   then set DETECTOR=yolo
+ultralytics>=8.2
